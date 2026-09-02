@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Geomorfositios de Costa Rica</title>
+<meta name="description" content="Catálogo del patrimonio geomorfológico de Costa Rica: geomorfositios volcánicos, tectónicos, fluviales, kársticos, glaciares y marinos." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header">
+  <div class="wrap header__inner">
+    <a href="#top" class="brand">
+      <span class="brand__mark" aria-hidden="true">GCR</span>
+      <span class="brand__text">Geomorfositios<em>Costa Rica</em></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="siteNav">
+      <span></span><span></span><span></span>
+      <span class="visually-hidden">Abrir menú</span>
+    </button>
+    <nav id="siteNav" class="site-nav">
+      <a href="#volcanico"><i class="chip chip--volcanico">VO</i>Volcánico</a>
+      <a href="#tectonico"><i class="chip chip--tectonico">TE</i>Tectónico</a>
+      <a href="#fluvial"><i class="chip chip--fluvial">FL</i>Fluvial</a>
+      <a href="#karstico"><i class="chip chip--karstico">KA</i>Kárstico</a>
+      <a href="#glaciar"><i class="chip chip--glaciar">GL</i>Glaciar</a>
+      <a href="#marino"><i class="chip chip--marino">MA</i>Marino</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+
+  <section class="hero" id="top">
+    <div class="hero__sky" aria-hidden="true"></div>
+    <svg class="hero__terrain" viewBox="0 0 1440 460" preserveAspectRatio="none" aria-hidden="true">
+      <path class="terrain terrain--back" d="M0,300 L90,280 180,310 260,260 340,290 430,240 520,280 610,250 700,300 790,270 880,310 970,265 1060,300 1150,270 1240,300 1330,260 1440,290 L1440,460 0,460 Z"/>
+      <path class="terrain terrain--mid" d="M0,360 L120,330 210,350 300,300 320,270 345,250 370,275 395,300 480,360 560,320 650,350 740,310 820,345 900,320 990,350 1080,300 1160,340 1250,310 1330,350 1440,320 L1440,460 0,460 Z"/>
+      <path class="volcano-glow" d="M300,300 L320,270 345,250 370,275 395,300 Z"/>
+      <path class="terrain terrain--front" d="M0,420 L100,400 200,415 300,390 400,410 500,395 600,415 700,400 800,420 900,405 1000,415 1100,398 1200,418 1300,402 1440,412 L1440,460 0,460 Z"/>
+      <path class="river" d="M760,300 C 740,340 780,360 755,400 C 735,430 760,445 745,460" />
+    </svg>
+    <div class="hero__content wrap">
+      <p class="eyebrow">Patrimonio geológico &amp; paisajístico</p>
+      <h1>Geomorfositios<br>de Costa&nbsp;Rica</h1>
+      <p class="hero__lede">Un país pequeño en un cruce de placas: volcanes activos, fallas vivas, ríos que cortan montañas jóvenes, calizas horadadas, cumbres talladas por hielo antiguo y costas moldeadas por dos océanos. Este catálogo reúne las formas del relieve que cuentan esa historia.</p>
+      <a href="#volcanico" class="hero__cta">Recorrer el relieve <span aria-hidden="true">↓</span></a>
+    </div>
+  </section>
+
+  <!-- ===================== VOLCÁNICO ===================== -->
+  <section class="category" id="volcanico" data-category="volcanico">
+    <div class="wrap category__head">
+      <i class="chip chip--volcanico chip--lg">VO</i>
+      <div>
+        <h2>Geomorfositios volcánicos</h2>
+        <p>Costa Rica se levanta sobre el arco volcánico centroamericano, producto de la subducción de la placa de Cocos bajo la placa Caribe. Sus cordilleras concentran estratovolcanes activos y calderas que han definido el relieve, el clima y el poblamiento del país durante los últimos dos millones de años.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-volcanico" data-loading="Cargando volcanes…"></div>
+  </section>
+
+  <svg class="contour" style="--divider-color: var(--c-tectonico)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
+    <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
+    <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
+  </svg>
+
+  <!-- ===================== TECTÓNICO ===================== -->
+  <section class="category" id="tectonico" data-category="tectonico">
+    <div class="wrap category__head">
+      <i class="chip chip--tectonico chip--lg">TE</i>
+      <div>
+        <h2>Geomorfositios tectónicos</h2>
+        <p>El choque y roce de placas tectónicas fractura el territorio en bloques que se levantan, se hunden o se deslizan entre sí. Fallas activas, escarpes y cordilleras plegadas registran, en la forma del terreno, la deformación acumulada de millones de años de actividad sísmica.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-tectonico" data-loading="Cargando sitios tectónicos…"></div>
+  </section>
+
+  <svg class="contour" style="--divider-color: var(--c-fluvial)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
+    <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
+    <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
+  </svg>
+
+  <!-- ===================== FLUVIAL ===================== -->
+  <section class="category" id="fluvial" data-category="fluvial">
+    <div class="wrap category__head">
+      <i class="chip chip--fluvial chip--lg">FL</i>
+      <div>
+        <h2>Geomorfositios fluviales</h2>
+        <p>Sobre laderas jóvenes y pendientes pronunciadas, los ríos costarricenses excavan cañones, precipitan en cataratas y transportan sedimento volcánico hacia los valles. La energía del agua esculpe, en pocos miles de años, algunos de los paisajes más dinámicos del país.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-fluvial" data-loading="Cargando sitios fluviales…"></div>
+  </section>
+
+  <svg class="contour" style="--divider-color: var(--c-karstico)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
+    <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
+    <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
+  </svg>
+
+  <!-- ===================== KÁRSTICO ===================== -->
+  <section class="category" id="karstico" data-category="karstico">
+    <div class="wrap category__head">
+      <i class="chip chip--karstico chip--lg">KA</i>
+      <div>
+        <h2>Geomorfositios kársticos</h2>
+        <p>En los afloramientos calizos del norte y el Pacífico, el agua de lluvia disuelve lentamente la roca y esculpe cavernas, dolinas y torres. Bajo tierra, estalactitas y estalagmitas registran, gota a gota, miles de años de infiltración.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-karstico" data-loading="Cargando sitios kársticos…"></div>
+  </section>
+
+  <svg class="contour" style="--divider-color: var(--c-glaciar)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
+    <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
+    <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
+  </svg>
+
+  <!-- ===================== GLACIAR ===================== -->
+  <section class="category" id="glaciar" data-category="glaciar">
+    <div class="wrap category__head">
+      <i class="chip chip--glaciar chip--lg">GL</i>
+      <div>
+        <h2>Geomorfositios glaciares</h2>
+        <p>Costa Rica no tiene glaciares hoy, pero los guardó: durante el último máximo glacial, casquetes de hielo cubrieron las cumbres más altas de la Cordillera de Talamanca. Circos, morrenas y lagos de origen glaciar sobreviven como relieve fósil por encima de los 3.400 metros.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-glaciar" data-loading="Cargando sitios glaciares…"></div>
+  </section>
+
+  <svg class="contour" style="--divider-color: var(--c-marino)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
+    <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
+    <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
+  </svg>
+
+  <!-- ===================== MARINO ===================== -->
+  <section class="category" id="marino" data-category="marino">
+    <div class="wrap category__head">
+      <i class="chip chip--marino chip--lg">MA</i>
+      <div>
+        <h2>Geomorfositios marinos</h2>
+        <p>Entre el Pacífico y el Caribe, el oleaje talla acantilados y plataformas de abrasión, construye tómbolos y arenales, y remodela playas donde anidan miles de tortugas cada año. La línea de costa costarricense es un límite en constante negociación entre tierra y mar.</p>
+      </div>
+    </div>
+    <div class="gallery wrap" id="gallery-marino" data-loading="Cargando sitios marinos…"></div>
+  </section>
+
+</main>
+
+<!-- ===================== MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalDialog">
+    <button class="modal__close" id="modalClose" aria-label="Cerrar ficha">
+      <span aria-hidden="true">×</span>
+    </button>
+    <div class="modal__scroll">
+      <i class="chip modal__ribbon" id="modalRibbon"></i>
+      <h2 id="modalTitle"></h2>
+      <p class="modal__region" id="modalRegion"></p>
+      <div class="modal__tags" id="modalTags"></div>
+      <p class="modal__desc" id="modalDesc"></p>
+
+      <h3 class="modal__subhead">Fotografías</h3>
+      <div class="modal__gallery" id="modalGallery"></div>
+
+      <h3 class="modal__subhead">Ubicación</h3>
+      <div class="modal__map" id="modalMap"></div>
+      <p class="modal__credit" id="modalCredit"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <span class="brand__mark" aria-hidden="true">GCR</span>
+      <p>Geomorfositios de Costa Rica es un catálogo divulgativo del patrimonio geomorfológico costarricense, con fines educativos y de gestión del territorio.</p>
+    </div>
+    <div class="footer__col">
+      <h3>Autoría</h3>
+      <p>Dennis Pérez Ureña<br>Comisión Nacional de Prevención de Riesgos y Atención de Emergencias (CNE)</p>
+    </div>
+    <div class="footer__col">
+      <h3>Contacto</h3>
+      <p><a href="mailto:dperezu@cne.go.cr">dperezu@cne.go.cr</a></p>
+      <p><a href="https://github.com/dennisperez10/GeomorphositesCR" target="_blank" rel="noopener">github.com/dennisperez10/GeomorphositesCR</a></p>
+    </div>
+    <div class="footer__col">
+      <h3>Fuentes cartográficas</h3>
+      <p>Mapas © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, vía Leaflet.<br>Fotografías: Wikimedia Commons (crédito individual en cada ficha).</p>
+    </div>
+  </div>
+  <div class="wrap footer__bottom">
+    <p>© <span id="year"></span> Geomorfositios de Costa Rica. Contenido con fines educativos.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

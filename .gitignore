@@ -1,0 +1,8 @@
+.DS_Store
+Thumbs.db
+*.log
+.vscode/*
+!.vscode/extensions.json
+.agents/
+.claude/
+skills-lock.json
