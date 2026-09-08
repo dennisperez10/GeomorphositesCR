@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Geomorfositios de Costa Rica</title>
-<meta name="description" content="Catálogo del patrimonio geomorfológico de Costa Rica: geomorfositios volcánicos, tectónicos, fluviales, kársticos, glaciares y marinos." />
+<meta name="description" content="Inventario de geomorfositios de los parques nacionales de Costa Rica: sitios volcánicos, tectónicos, fluviales, kársticos y glaciares/periglaciales, con su clasificación de valor geomorfológico." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
       <a href="#fluvial"><i class="chip chip--fluvial">FL</i>Fluvial</a>
       <a href="#karstico"><i class="chip chip--karstico">KA</i>Kárstico</a>
       <a href="#glaciar"><i class="chip chip--glaciar">GL</i>Glaciar</a>
-      <a href="#marino"><i class="chip chip--marino">MA</i>Marino</a>
+      <a href="#sin-clasificar"><i class="chip chip--sin-clasificar">SC</i>Otros</a>
     </nav>
   </div>
 </header>
@@ -53,10 +53,16 @@
     <div class="hero__content wrap">
       <p class="eyebrow">Patrimonio geológico &amp; paisajístico</p>
       <h1>Geomorfositios<br>de Costa&nbsp;Rica</h1>
-      <p class="hero__lede">Un país pequeño en un cruce de placas: volcanes activos, fallas vivas, ríos que cortan montañas jóvenes, calizas horadadas, cumbres talladas por hielo antiguo y costas moldeadas por dos océanos. Este catálogo reúne las formas del relieve que cuentan esa historia.</p>
+      <p class="hero__lede">Inventario de 65 geomorfositios registrados en parques nacionales costarricenses: cráteres y conos volcánicos, escarpes tectónicos, cañones y cataratas fluviales, cavernas kársticas y el relieve fósil glaciar/periglacial de Talamanca, cada uno con su clasificación de valor geomorfológico.</p>
       <a href="#volcanico" class="hero__cta">Recorrer el relieve <span aria-hidden="true">↓</span></a>
     </div>
   </section>
+
+  <div class="search-bar wrap">
+    <label class="visually-hidden" for="siteSearch">Buscar geomorfositio por nombre o ubicación</label>
+    <input type="search" id="siteSearch" class="search-bar__input" placeholder="Buscar por nombre, distrito, cantón o provincia…" autocomplete="off" />
+    <span class="search-bar__count" id="siteSearchCount" aria-live="polite"></span>
+  </div>
 
   <!-- ===================== VOLCÁNICO ===================== -->
   <section class="category" id="volcanico" data-category="volcanico">
@@ -64,7 +70,7 @@
       <i class="chip chip--volcanico chip--lg">VO</i>
       <div>
         <h2>Geomorfositios volcánicos</h2>
-        <p>Costa Rica se levanta sobre el arco volcánico centroamericano, producto de la subducción de la placa de Cocos bajo la placa Caribe. Sus cordilleras concentran estratovolcanes activos y calderas que han definido el relieve, el clima y el poblamiento del país durante los últimos dos millones de años.</p>
+        <p>Costa Rica se levanta sobre el arco volcánico centroamericano, producto de la subducción de la placa de Cocos bajo la placa Caribe. Cráteres, conos, domos y cuevas de origen volcánico —principalmente dentro de los parques nacionales Volcán Poás, Volcán Irazú y Chirripó— documentan esa actividad.</p>
       </div>
     </div>
     <div class="gallery wrap" id="gallery-volcanico" data-loading="Cargando volcanes…"></div>
@@ -82,7 +88,7 @@
       <i class="chip chip--tectonico chip--lg">TE</i>
       <div>
         <h2>Geomorfositios tectónicos</h2>
-        <p>El choque y roce de placas tectónicas fractura el territorio en bloques que se levantan, se hunden o se deslizan entre sí. Fallas activas, escarpes y cordilleras plegadas registran, en la forma del terreno, la deformación acumulada de millones de años de actividad sísmica.</p>
+        <p>El choque y roce de placas tectónicas fractura el territorio en bloques que se levantan, se hunden o se deslizan entre sí. Fallas activas, escarpes y cerros de origen estructural registran, en la forma del terreno, la deformación acumulada de la actividad sísmica.</p>
       </div>
     </div>
     <div class="gallery wrap" id="gallery-tectonico" data-loading="Cargando sitios tectónicos…"></div>
@@ -100,7 +106,7 @@
       <i class="chip chip--fluvial chip--lg">FL</i>
       <div>
         <h2>Geomorfositios fluviales</h2>
-        <p>Sobre laderas jóvenes y pendientes pronunciadas, los ríos costarricenses excavan cañones, precipitan en cataratas y transportan sedimento volcánico hacia los valles. La energía del agua esculpe, en pocos miles de años, algunos de los paisajes más dinámicos del país.</p>
+        <p>Sobre laderas jóvenes y pendientes pronunciadas, los ríos costarricenses excavan cañones, precipitan en cataratas y alimentan humedales y lagunas. Es el proceso geomorfológico más representado en este inventario, concentrado principalmente en la zona de Coto Brus.</p>
       </div>
     </div>
     <div class="gallery wrap" id="gallery-fluvial" data-loading="Cargando sitios fluviales…"></div>
@@ -118,7 +124,7 @@
       <i class="chip chip--karstico chip--lg">KA</i>
       <div>
         <h2>Geomorfositios kársticos</h2>
-        <p>En los afloramientos calizos del norte y el Pacífico, el agua de lluvia disuelve lentamente la roca y esculpe cavernas, dolinas y torres. Bajo tierra, estalactitas y estalagmitas registran, gota a gota, miles de años de infiltración.</p>
+        <p>En afloramientos calizos, el agua de lluvia disuelve lentamente la roca y esculpe cavernas y dolinas. Bajo tierra, estalactitas y estalagmitas registran, gota a gota, miles de años de infiltración.</p>
       </div>
     </div>
     <div class="gallery wrap" id="gallery-karstico" data-loading="Cargando sitios kársticos…"></div>
@@ -135,29 +141,29 @@
     <div class="wrap category__head">
       <i class="chip chip--glaciar chip--lg">GL</i>
       <div>
-        <h2>Geomorfositios glaciares</h2>
-        <p>Costa Rica no tiene glaciares hoy, pero los guardó: durante el último máximo glacial, casquetes de hielo cubrieron las cumbres más altas de la Cordillera de Talamanca. Circos, morrenas y lagos de origen glaciar sobreviven como relieve fósil por encima de los 3.400 metros.</p>
+        <h2>Geomorfositios glaciares y periglaciales</h2>
+        <p>Costa Rica no tiene glaciares hoy, pero los guardó: durante el último máximo glacial, casquetes de hielo cubrieron las cumbres más altas de la Cordillera de Talamanca. Valles, morrenas y lagunas de origen glaciar —junto con formas periglaciales y glaciofluviales asociadas— sobreviven como relieve fósil en el Parque Nacional Chirripó, por encima de los 3.000 metros.</p>
       </div>
     </div>
     <div class="gallery wrap" id="gallery-glaciar" data-loading="Cargando sitios glaciares…"></div>
   </section>
 
-  <svg class="contour" style="--divider-color: var(--c-marino)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+  <svg class="contour" style="--divider-color: var(--c-sin-clasificar)" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0,40 C 200,10 300,70 500,40 C 700,10 800,70 1000,40 C 1200,10 1300,70 1440,40" />
     <path d="M0,55 C 200,25 300,85 500,55 C 700,25 800,85 1000,55 C 1200,25 1300,85 1440,55" />
     <path d="M0,25 C 200,-5 300,55 500,25 C 700,-5 800,55 1000,25 C 1200,-5 1300,55 1440,25" />
   </svg>
 
-  <!-- ===================== MARINO ===================== -->
-  <section class="category" id="marino" data-category="marino">
+  <!-- ===================== SIN CLASIFICAR ===================== -->
+  <section class="category" id="sin-clasificar" data-category="sin-clasificar">
     <div class="wrap category__head">
-      <i class="chip chip--marino chip--lg">MA</i>
+      <i class="chip chip--sin-clasificar chip--lg">SC</i>
       <div>
-        <h2>Geomorfositios marinos</h2>
-        <p>Entre el Pacífico y el Caribe, el oleaje talla acantilados y plataformas de abrasión, construye tómbolos y arenales, y remodela playas donde anidan miles de tortugas cada año. La línea de costa costarricense es un límite en constante negociación entre tierra y mar.</p>
+        <h2>Otros sitios sin proceso principal registrado</h2>
+        <p>Sitios del Parque Internacional La Amistad que el inventario incluye sin un proceso geomorfológico principal asignado. Se listan aquí en lugar de forzar una categoría no respaldada por la fuente de datos.</p>
       </div>
     </div>
-    <div class="gallery wrap" id="gallery-marino" data-loading="Cargando sitios marinos…"></div>
+    <div class="gallery wrap" id="gallery-sin-clasificar" data-loading="Cargando otros sitios…"></div>
   </section>
 
 </main>
@@ -175,12 +181,11 @@
       <div class="modal__tags" id="modalTags"></div>
       <p class="modal__desc" id="modalDesc"></p>
 
-      <h3 class="modal__subhead">Fotografías</h3>
-      <div class="modal__gallery" id="modalGallery"></div>
+      <h3 class="modal__subhead">Ficha técnica</h3>
+      <div class="modal__facts" id="modalFacts"></div>
 
       <h3 class="modal__subhead">Ubicación</h3>
       <div class="modal__map" id="modalMap"></div>
-      <p class="modal__credit" id="modalCredit"></p>
     </div>
   </div>
 </div>
@@ -201,8 +206,8 @@
       <p><a href="https://github.com/dennisperez10/GeomorphositesCR" target="_blank" rel="noopener">github.com/dennisperez10/GeomorphositesCR</a></p>
     </div>
     <div class="footer__col">
-      <h3>Fuentes cartográficas</h3>
-      <p>Mapas © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, vía Leaflet.<br>Fotografías: Wikimedia Commons (crédito individual en cada ficha).</p>
+      <h3>Fuentes de datos</h3>
+      <p>Inventario: <a href="https://github.com/dennisperez10/Tarea2/blob/main/Geomorfositios.csv" target="_blank" rel="noopener">Geomorfositios.csv</a>.<br>Mapas © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, vía Leaflet.</p>
     </div>
   </div>
   <div class="wrap footer__bottom">

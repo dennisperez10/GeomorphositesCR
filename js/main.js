@@ -6,8 +6,8 @@
     tectonico: "Tectónico",
     fluvial: "Fluvial",
     karstico: "Kárstico",
-    glaciar: "Glaciar",
-    marino: "Marino"
+    glaciar: "Glaciar / periglacial",
+    "sin-clasificar": "Sin clasificar"
   };
 
   document.getElementById("year").textContent = new Date().getFullYear();
@@ -39,6 +39,22 @@
     return parts.join(" · ");
   }
 
+  // Rango Unicode de marcas diacríticas combinantes (U+0300–U+036F) que deja
+  // el paso NFD de normalize() al separar una letra acentuada de su tilde.
+  var DIACRITICS_RE = new RegExp("[̀-ͯ]", "g");
+  function normalizeText(str) {
+    return String(str == null ? "" : str)
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(DIACRITICS_RE, "");
+  }
+
+  function escapeHtml(str) {
+    return String(str == null ? "" : str).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
   /* ---------- render de tarjetas ---------- */
   function renderGalleries() {
     var byCategory = {};
@@ -60,18 +76,19 @@
         card.setAttribute("aria-haspopup", "dialog");
         card.setAttribute("aria-label", "Ver ficha de " + site.name);
         card.dataset.id = site.id;
+        card.dataset.search = normalizeText(site.name + " " + site.region);
 
-        var img = site.images && site.images[0] ? site.images[0].url : "";
+        var initials = cat.slice(0, 2).toUpperCase();
 
         card.innerHTML =
-          '<div class="card__media">' +
-            (img ? '<img src="' + img + '" alt="' + site.name + '" loading="lazy">' : "") +
-            '<i class="chip chip--' + cat + ' card__ribbon">' + cat.slice(0, 2).toUpperCase() + "</i>" +
+          '<div class="card__media card__media--placeholder" style="--media-color:var(--c-' + cat + ')">' +
+            '<span class="card__monogram" aria-hidden="true">' + initials + "</span>" +
+            '<i class="chip chip--' + cat + ' card__ribbon">' + initials + "</i>" +
           "</div>" +
           '<div class="card__body">' +
-            '<h3 class="card__title">' + site.name + "</h3>" +
-            '<p class="card__region">' + site.region + "</p>" +
-            '<p class="card__teaser">' + site.summary + "</p>" +
+            '<h3 class="card__title">' + escapeHtml(site.name) + "</h3>" +
+            '<p class="card__region">' + escapeHtml(site.region) + "</p>" +
+            '<p class="card__teaser">' + escapeHtml(site.summary) + "</p>" +
             '<span class="tag-field">' + fieldTag(site) + "</span>" +
           "</div>";
 
@@ -108,12 +125,52 @@
     cards.forEach(function (c) { io.observe(c); });
   }
 
+  /* ---------- buscador ---------- */
+  var searchInput = document.getElementById("siteSearch");
+  var searchCount = document.getElementById("siteSearchCount");
+
+  function applySearch() {
+    var term = normalizeText(searchInput.value || "").trim();
+    var visible = 0;
+    var total = 0;
+    document.querySelectorAll(".gallery").forEach(function (gallery) {
+      var anyVisible = false;
+      gallery.querySelectorAll(".card").forEach(function (card) {
+        total++;
+        var match = !term || card.dataset.search.indexOf(term) !== -1;
+        card.hidden = !match;
+        if (match) { visible++; anyVisible = true; }
+      });
+      var section = gallery.closest(".category");
+      if (section) section.hidden = term.length > 0 && !anyVisible;
+    });
+    if (searchCount) {
+      searchCount.textContent = term
+        ? "Mostrando " + visible + " de " + total + " sitios"
+        : total + " sitios en el catálogo";
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", applySearch);
+  }
+
   /* ---------- modal ---------- */
   var overlay = document.getElementById("modalOverlay");
   var dialog = document.getElementById("modalDialog");
   var closeBtn = document.getElementById("modalClose");
   var lastFocused = null;
   var leafletMap = null;
+
+  function factRow(label, value) {
+    if (value === null || value === undefined || value === "") return "";
+    return (
+      '<div class="fact">' +
+        '<span class="fact__label">' + escapeHtml(label) + "</span>" +
+        '<span class="fact__value">' + escapeHtml(value) + "</span>" +
+      "</div>"
+    );
+  }
 
   function openModal(site, triggerEl) {
     lastFocused = triggerEl || document.activeElement;
@@ -126,24 +183,22 @@
     var tags = document.getElementById("modalTags");
     tags.innerHTML =
       '<span class="tag-field">' + formatCoord(site.lat, site.lng) + "</span>" +
-      (site.elevation_m ? '<span class="tag-field">' + site.elevation_m + " msnm</span>" : "");
+      (site.elevation_m ? '<span class="tag-field">' + site.elevation_m + " msnm</span>" : "") +
+      (site.clasificacion ? '<span class="tag-field">Valor: ' + escapeHtml(site.clasificacion) + "</span>" : "");
 
     document.getElementById("modalDesc").textContent = site.summary;
 
-    var gallery = document.getElementById("modalGallery");
-    gallery.innerHTML = "";
-    var credits = [];
-    (site.images || []).forEach(function (im) {
-      var im_el = document.createElement("img");
-      im_el.src = im.url;
-      im_el.alt = site.name;
-      im_el.loading = "lazy";
-      gallery.appendChild(im_el);
-      if (im.credit) credits.push(im.credit);
-    });
-    document.getElementById("modalCredit").textContent = credits.length
-      ? "Fotografías: " + credits.join(" · ")
-      : "";
+    var facts = document.getElementById("modalFacts");
+    facts.innerHTML =
+      factRow("Área protegida", site.areaProtegida) +
+      factRow("Provincia", site.provincia) +
+      factRow("Cantón", site.canton) +
+      factRow("Distrito", site.distrito) +
+      factRow("Proceso geomorfológico", site.proceso) +
+      factRow("Carácter", site.caracteristica) +
+      factRow("Clasificación de valor", site.clasificacion) +
+      factRow("Valor científico", site.valorCientifico != null ? site.valorCientifico.toFixed(2) : "") +
+      factRow("Valor añadido", site.valorAnadido != null ? site.valorAnadido.toFixed(2) : "");
 
     overlay.hidden = false;
     document.body.style.overflow = "hidden";
@@ -159,7 +214,7 @@
         }).addTo(leafletMap);
         leafletMap._marker = L.marker([0, 0]).addTo(leafletMap);
       }
-      leafletMap.setView([site.lat, site.lng], 12);
+      leafletMap.setView([site.lat, site.lng], 13);
       leafletMap._marker.setLatLng([site.lat, site.lng]).bindPopup(site.name);
       leafletMap.invalidateSize();
     });
@@ -171,13 +226,33 @@
     if (lastFocused) lastFocused.focus();
   }
 
+  function getFocusable() {
+    return Array.prototype.slice.call(
+      dialog.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    ).filter(function (el) { return el.offsetParent !== null; });
+  }
+
   closeBtn.addEventListener("click", closeModal);
   overlay.addEventListener("click", function (e) {
     if (e.target === overlay) closeModal();
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !overlay.hidden) closeModal();
+    if (overlay.hidden) return;
+    if (e.key === "Escape") { closeModal(); return; }
+    if (e.key !== "Tab") return;
+    var focusable = getFocusable();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   });
 
   renderGalleries();
+  applySearch();
 })();
