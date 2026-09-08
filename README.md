@@ -58,4 +58,4 @@ Si se agregan fotografías propias en el futuro, se puede reincorporar un campo 
 
 - Datos: inventario [Geomorfositios.csv](https://github.com/dennisperez10/Tarea2/blob/main/Geomorfositios.csv).
 - Mapas: © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors, vía [Leaflet](https://leafletjs.com/).
-- Autoría del sitio: Dennis Pérez Ureña — Comisión Nacional de Prevención de Riesgos y Atención de Emergencias (CNE).
+- Autoría del sitio: Dennis Pérez-Umaña.
