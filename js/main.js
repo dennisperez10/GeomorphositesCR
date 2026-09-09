@@ -141,7 +141,13 @@
         total++;
         var match = !term || card.dataset.search.indexOf(term) !== -1;
         card.hidden = !match;
-        if (match) { visible++; anyVisible = true; }
+        if (match) {
+          visible++;
+          anyVisible = true;
+          // Un resultado de búsqueda debe verse de inmediato, sin depender
+          // de que el usuario haya scrolleado hasta esa tarjeta antes.
+          card.classList.add("is-visible");
+        }
       });
       var section = gallery.closest(".category");
       if (section) section.hidden = term.length > 0 && !anyVisible;
