@@ -76,7 +76,9 @@
         card.setAttribute("aria-haspopup", "dialog");
         card.setAttribute("aria-label", "Ver ficha de " + site.name);
         card.dataset.id = site.id;
-        card.dataset.search = normalizeText(site.name + " " + site.region);
+        card.dataset.search = normalizeText(
+          [site.name, site.region, site.areaProtegida, site.proceso].filter(Boolean).join(" ")
+        );
 
         var initials = cat.slice(0, 2).toUpperCase();
 
